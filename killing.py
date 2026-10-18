@@ -1,5 +1,6 @@
 import time
 import minescript as m
+import playerRadiusCheck as prc
 
 # ---------------- Config ----------------
 
@@ -58,14 +59,7 @@ def main():
     while not pause:
         m.echo("Killing: Restarting")
 
-        m.echo("Player List:")
-        for player in m.players():
-            m.echo(" - " + player.name)
-            if player.name != "AllInMyFantasy" and player.name != "Jodu555":
-                pause = True
-                time.sleep(1)
-                m.execute("/ph Jodu555")
-                break
+        pause = prc.areUnkownPlayersInRadius(m, m.players())
 
         # Select sword
         m.player_inventory_select_slot(SWORD_SLOT)
